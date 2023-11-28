@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Personalizable</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .carta {
+      position: relative;
+      width: 500px;
+      height: 400px;
+      background-color: #612561;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .contenido {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300%;
+      text-align: center;
+    }
+
+    .boton {
+      cursor: pointer;
+      padding: 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      margin-top: 30px;
+    }
+
+    .otro-boton {
+      cursor: pointer;
+      padding: 20px;
+      background-color: #e74c3c; /* Color diferente para el nuevo botón */
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      margin-top: 30px;
+    }
+
+    .texto-usuario {
+      display: none;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .mensaje {
+        font-size: 40px; /* Tamaño de fuente aumentado */
+        line-height: 50px; /* Ajusta el espaciado entre líneas según sea necesario */
+        color: #fff; /* Añade color blanco al texto */
+        white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<div class="carta" onclick="abrirCarta()">
+  <div class="contenido">
+    <h2>¡Hola!</h2>
+    <p>Quiero decirte que...</p>
+    <p class="mensaje"><strong>¡Abre la carta!</strong></p>
+    <textarea class="texto-usuario" id="textoUsuario"></textarea>
+    <button class="boton" onclick="guardarContenido()">Abrir</button>
+  </div>
+</div>
+
+<script>
+  function abrirCarta() {
+    const contenido = document.querySelector('.contenido');
+    const botonAbrir = document.querySelector('.boton');
+
+    contenido.innerHTML = '<h2>¡Espero hayas tendido un bonito día!</h2><p>¡Dejame decirte que hoy estabas muy bonita ❤ !</p>';
+    
+    // Agrega un nuevo botón
+    const otroBoton = document.createElement('button');
+    otroBoton.innerText = 'Abrelo otra vez';
+    otroBoton.className = 'otro-boton';
+    
+    // Agrega evento onclick para mostrar un mensaje
+    otroBoton.onclick = function () {
+      alert('¡TE QUIERO!');
+    };
+
+    // Añade el nuevo botón al contenido
+    contenido.appendChild(otroBoton);
+
+    botonAbrir.innerText = 'Abrir otra vez';
+    botonAbrir.onclick = function () {
+      contenido.innerHTML = '<h2>¡Hola!</h2><p>Quiero decirte que...</p><p class="mensaje"><strong>¡Abre la carta!</strong></p>';
+      botonAbrir.innerText = 'Abrir';
+      botonAbrir.onclick = function () {
+        abrirCarta();
+      };
+    };
+  }
+    // Restablece el botón para abrir otra vez
+    const botonAbrir = document.querySelector('.boton');
+    botonAbrir.innerText = 'Abrir';
+    botonAbrir.onclick = function () {
+      abrirCarta();
+    };
+  
+</script>
+
+</body>
+</html>
